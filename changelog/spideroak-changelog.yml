@@ -1,0 +1,113 @@
+generated: '2026-08-29'
+method: searched
+source: https://github.com/aranya-project/aranya/releases (GitHub Releases API), plus https://spideroak.com/release-notes/
+  for the legacy consumer line
+provider: SpiderOak
+api: Aranya Client API
+scheme: semver, one dated GitHub release per version with a written changelog body
+current_version: 7.0.1
+current_date: '2026-08-12'
+primary_changelog: https://github.com/aranya-project/aranya/releases
+secondary_changelogs:
+- name: aranya-core per-crate CHANGELOG.md
+  url: https://github.com/aranya-project/aranya-core
+  note: 25 component crates each carry their own CHANGELOG.md.
+- name: SpiderOak product release notes (legacy consumer line)
+  url: https://spideroak.com/release-notes/
+  note: 'Dated index for SpiderOak ONE Backup, CrossClave, Groups, Share, Semaphor, Encryptr. Newest entry: One
+    Backup 7.5.2, 2025-04-16.'
+note: Changelogs are prose in the GitHub release body, not a machine-readable feed. Breaking-change flags below
+  are API Evangelist derivations from the SemVer major bump plus explicit "(breaking API change)" language in the
+  release text; releases where neither signal is present are recorded false.
+entry_count: 12
+entries:
+- version: v7.0.1
+  date: '2026-08-12'
+  url: https://github.com/aranya-project/aranya/releases/tag/v7.0.1
+  breaking: false
+  highlights:
+  - 'Peer sync now uses certificate-based mTLS (PR #786).'
+  assets: 13
+- version: v6.0.0
+  date: '2026-04-01'
+  url: https://github.com/aranya-project/aranya/releases/tag/v6.0.0
+  breaking: true
+  highlights:
+  - Rank-based authorization for custom roles.
+  - Sync transport layer refactored for extensibility.
+  - Significant sync and runtime performance improvements.
+  assets: 13
+- version: v5.0.0
+  date: '2026-02-18'
+  url: https://github.com/aranya-project/aranya/releases/tag/v5.0.0
+  breaking: false
+  highlights:
+  - Client IPC timeouts increased to prevent timeouts during long-running operations.
+  - New certificate generation tool (aranya-certgen).
+  - Arithmetic overflow checks added.
+  assets: 13
+- version: v4.1.1
+  date: '2026-02-03'
+  url: https://github.com/aranya-project/aranya/releases/tag/v4.1.1
+  breaking: false
+  highlights:
+  - Security patch release for RUSTSEC-2026-0007 (defensive; Aranya does not directly trigger the vulnerable path).
+  assets: 13
+- version: v4.1.0
+  date: '2026-01-07'
+  url: https://github.com/aranya-project/aranya/releases/tag/v4.1.0
+  breaking: false
+  highlights:
+  - add_peer() sync_now() is now scheduled asynchronously.
+  - Docs for custom roles and sync hello.
+  assets: 13
+- version: v4.0.0
+  date: '2025-11-14'
+  url: https://github.com/aranya-project/aranya/releases/tag/v4.0.0
+  breaking: true
+  highlights:
+  - Custom roles, with a default set initialized by setup_default_roles(); general-purpose custom roles behind the
+    preview feature flag.
+  assets: 13
+- version: v3.0.0
+  date: '2025-10-01'
+  url: https://github.com/aranya-project/aranya/releases/tag/v3.0.0
+  breaking: true
+  highlights:
+  - Aranya Fast Channels (AFC) raw channel encryption/decryption, behind afc + preview feature flags.
+  - AQC moved behind aqc + experimental feature flags.
+  assets: 13
+- version: v2.0.0
+  date: '2025-08-20'
+  url: https://github.com/aranya-project/aranya/releases/tag/v2.0.0
+  breaking: true
+  highlights:
+  - AQC channel deletion with PSK zeroization (BREAKING API change).
+  - Syncing with peers on multiple teams; devices in multiple teams.
+  - Syncer peer cache to reduce duplicate command sends.
+  - Performance metrics measurement.
+  assets: 5
+- version: v0.6.3
+  date: '2025-08-14'
+  url: https://github.com/aranya-project/aranya/releases/tag/v0.6.3
+  breaking: false
+  highlights: null
+  assets: 5
+- version: v0.6.2
+  date: '2025-08-04'
+  url: https://github.com/aranya-project/aranya/releases/tag/v0.6.2
+  breaking: false
+  highlights: null
+  assets: 5
+- version: v1.0.0
+  date: '2025-07-10'
+  url: https://github.com/aranya-project/aranya/releases/tag/v1.0.0
+  breaking: null
+  highlights: null
+  assets: 5
+- version: v0.7.0
+  date: '2025-06-27'
+  url: https://github.com/aranya-project/aranya/releases/tag/v0.7.0
+  breaking: null
+  highlights: null
+  assets: 5

@@ -1,0 +1,79 @@
+generated: '2026-08-29'
+method: probed
+source: direct HTTPS GET of each /.well-known/ path on every SpiderOak-controlled host, 2026-08-29
+note: 'Every /.well-known/ path returned 404 on all four hosts, so NO WellKnown or SecurityTxt pointer is emitted
+  in apis.yml — this file records a verified absence, not a served surface. SpiderOak does publish a security disclosure
+  policy and a named security contact, but at ordinary web paths (https://spideroak.com/security-response/ and the
+  Aranya project SECURITY.md), not as an RFC 9116 security.txt. Publishing /.well-known/security.txt pointing at
+  those existing pages would be a near-zero-cost win for a company whose entire product is security. Additional
+  probes on the same hosts: /.well-known/agent-card.json 404, /.well-known/agent.json 404, /.well-known/oauth-protected-resource
+  not applicable (no OAuth surface).'
+hosts:
+- host: spideroak.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+- host: api.spideroak.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+- host: aranya-project.github.io
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+- host: spideroak.one
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null

@@ -1,0 +1,146 @@
+generated: '2026-08-29'
+method: searched
+source: capi/spideroak-aranya-client.h, https://aranya-project.github.io/technical-apis, https://aranya-project.github.io/getting-started,
+  https://github.com/aranya-project/aranya/releases, https://aranya-project.github.io/observability/overview
+provider: SpiderOak
+api: Aranya Client API
+note: Aranya is a library API over a local daemon, not an HTTP API. Several conventions this artifact normally records
+  (pagination, sparse fieldsets, request-id headers, rate-limit headers, HTTP error envelopes) have no analogue
+  and are recorded as na with a reason rather than left blank.
+auth_style:
+  style: cryptographic device identity + PSK/mTLS peer sync; no tokens or keys
+  see: authentication/spideroak-authentication.yml
+naming:
+  function_prefix: aranya_
+  type_prefix: Aranya
+  constant_prefix: ARANYA_
+  error_prefix: ARANYA_ERROR_
+  dual_variant: 'Every fallible function ships in two forms: aranya_x() returning AranyaError only, and aranya_x_ext()
+    which additionally populates an AranyaExtError handle carrying a human-readable message. 111 public functions
+    plus their _ext twins.'
+resource_lifecycle:
+  style: explicit init/cleanup pairs
+  description: 'Every heap-backed handle (client, role, label, config builder, AFC channel, ctrl msg, seq, ext error)
+    has a matching *_cleanup function that the caller must invoke. Config objects use a builder pattern: *_config_builder_init
+    -> setters -> *_config_build -> *_config_builder_cleanup.'
+buffer_protocol:
+  description: 'String and ID outputs are written into a caller-supplied buffer; if it is too small the call returns
+    ARANYA_ERROR_BUFFER_TOO_SMALL and the caller retries with a larger one. Sizes are published as header constants:
+    ARANYA_ID_LEN 32, ARANYA_ID_STR_LEN ((32*1375)/1000)+1, ARANYA_SEED_IKM_LEN 32, ARANYA_AFC_CHANNEL_OVERHEAD
+    24.'
+time_units:
+  description: Durations are expressed with published constants ARANYA_DURATION_NANOSECONDS / _MICROSECONDS / _MILLISECONDS
+    / _SECONDS.
+error_envelope:
+  shape: AranyaError return code + optional AranyaExtError message handle
+  see: errors/spideroak-error-codes.yml
+  rfc9457: false
+  reason: no HTTP surface, so no problem+json
+versioning:
+  scheme: SemVer per crate; the aranya client/daemon/keygen/util crates version together (currently 7.0.1)
+  cadence: major releases generally every 6 weeks, per the published release process
+  docs: https://aranya-project.github.io/release-process/
+  see: lifecycle/spideroak-lifecycle.yml
+pagination:
+  supported: na
+  reason: library API; collection getters (aranya_team_devices, aranya_team_roles, aranya_team_labels) return the
+    full local graph state, which is bounded by the team, not a server page.
+field_expansion:
+  supported: na
+  reason: typed C structs and Rust types; no field-selection surface.
+metadata:
+  supported: na
+  reason: no user-defined metadata bag on Aranya objects.
+request_id_tracing:
+  supported: partial
+  description: Aranya publishes a dedicated observability section (overview, logging, policy, sync, AFC, implementation)
+    and ships an aranya-metrics crate; the daemon emits trace spans. There is no per-request correlation id returned
+    to the caller.
+  docs: https://aranya-project.github.io/observability/overview
+rate_limit_signaling:
+  supported: na
+  reason: no server-side quota; see rate-limits/spideroak-rate-limits.yml
+idempotency:
+  supported: na
+  declared: false
+  reason: No idempotency key, no request-replay protection and no de-duplication semantics are documented for the
+    client API. Aranya does have a related-but-different property — commands added to the DAG are deterministically
+    ordered by the braid algorithm on merge, and finalization gives global consistency — but that is convergence,
+    not caller-side idempotency, and the docs never claim a repeated action is a no-op. NO Idempotency pointer is
+    emitted in apis.yml on the strength of graph convergence.
+  docs: https://aranya-project.github.io/braid-optimization/
+dry_run_mode:
+  supported: partial
+  description: 'Ephemeral sessions are the closest published mechanism: the glossary states that in ephemeral sessions
+    "commands are locally processed by a policy but do not persist to the graph". That is a real rehearsal surface
+    for policy evaluation, published as a specification at https://aranya-project.github.io/aranya-sessions/, but
+    it is not exposed as a dry-run flag on the C client functions in v7.0.1.'
+reversibility:
+  grade: documented
+  write_surface: true
+  note: 'Aranya publishes a genuine reversal operation for every membership, authorization and channel write, and
+    they are first-class functions rather than side effects. What it does NOT publish anywhere in its docs, specs
+    or release notes is a WINDOW — no time limit, no "before X" precondition, no retention period is stated for
+    any of them. Under the 0.12.0 rule that is `documented`, not `verified`, and no window is asserted here because
+    inventing one would be the one error in this pipeline that could cost a user real access. There is one published
+    irreversibility worth flagging in the opposite direction: SpiderOak ONE''s own llms.txt states "SpiderOak cannot
+    read it or reset the password. A lost password means unrecoverable data — by design." That is an explicitly
+    documented NON-reversible operation.'
+  reversals:
+  - operation: aranya_add_device_to_team
+    reversal: aranya_remove_device_from_team
+    window: null
+    window_source: null
+  - operation: aranya_assign_role
+    reversal: aranya_revoke_role
+    window: null
+    window_source: null
+  - operation: aranya_add_perm_to_role
+    reversal: aranya_remove_perm_from_role
+    window: null
+    window_source: null
+  - operation: aranya_create_role
+    reversal: aranya_delete_role
+    window: null
+    window_source: null
+  - operation: aranya_assign_label
+    reversal: aranya_revoke_label
+    window: null
+    window_source: null
+  - operation: aranya_create_label
+    reversal: aranya_delete_label
+    window: null
+    window_source: null
+  - operation: aranya_add_sync_peer
+    reversal: aranya_remove_sync_peer
+    window: null
+    window_source: null
+  - operation: aranya_sync_hello_subscribe
+    reversal: aranya_sync_hello_unsubscribe
+    window: null
+    window_source: null
+  - operation: aranya_afc_create_channel
+    reversal: aranya_afc_send_channel_delete / aranya_afc_receive_channel_delete
+    window: null
+    window_source: null
+  - operation: aranya_add_team
+    reversal: aranya_remove_team
+    window: null
+    window_source: null
+  - operation: aranya_create_team
+    reversal: aranya_close_team
+    window: null
+    window_source: null
+  caveats:
+  - Revocation is defined in the provider glossary as "Removal of access to a specific data set" — it removes future
+    access; it does not retract data a peer already synced and decrypted.
+  - v2.0.0 release notes record "AQC channel deletion w/ PSK zeroization (breaking API change)", i.e. channel deletion
+    is documented as zeroizing the pre-shared key.
+  - 'Reversal is itself policy-gated: every operation above is available "as determined by the implemented policy",
+    so a deployment can write a policy in which a role assignment is not revocable.'
+cross_links:
+  errors: errors/spideroak-error-codes.yml
+  lifecycle: lifecycle/spideroak-lifecycle.yml
+  authentication: authentication/spideroak-authentication.yml
+  rate_limits: rate-limits/spideroak-rate-limits.yml
+  data_model: data-model/spideroak-data-model.yml

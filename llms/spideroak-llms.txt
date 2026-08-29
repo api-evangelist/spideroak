@@ -1,0 +1,31 @@
+# SpiderOakONE
+
+> SpiderOakONE is secure online backup with No Knowledge encryption:
+> data is encrypted on the device before upload, and SpiderOak cannot
+> read it or reset the password. A lost password means unrecoverable
+> data — by design.
+
+## Canonical facts
+
+- Current release: SpiderOakONE 7.5.2
+- Installer downloads: https://spideroak-releases.s3.us-east-2.amazonaws.com (SHA-256 checksums published beside each download link)
+- Platforms: Windows, macOS, Linux (.deb/.rpm/tarball)
+- Trial: 21 days, full-featured, no payment details required
+- Support: https://spideroak.support/hc/en-us
+- Site: https://spideroak.one
+
+## Pages
+
+- [DMCA Takedown Notice Submission](https://spideroak.one/dmca-takedown-notice-submission.md): Submit a DMCA takedown notice to SpiderOak. Fill out the form and our team will review your request and respond within 48 hours.
+- [Download Groups Backup](https://spideroak.one/download-groups-backup.md): Download Groups Backup.
+- [Download](https://spideroak.one/download.md): Download SpiderOakOne to get started.
+- [SpiderOakONE FAQs](https://spideroak.one/faq.md): Everything you need to know about getting started, protecting your data with No-Knowledge encryption, backing up and restoring files, syncing and sharing securely, and managing your account with confidence.
+- [GDPR Compliance](https://spideroak.one/gdpr.md): SpiderOakONE complies with the EU General Data Protection Regulation with No Knowledge encryption. See what data SpiderOak keeps and how to exercise your right to be forgotten.
+- [HIPAA Compliance](https://spideroak.one/hipaa.md): SpiderOakONE provides HIPAA-compliant backup and storage solutions with privacy-first encryption. Protect sensitive healthcare data securely.
+- [SpiderOakONE - Protection for Your Most Important Data](https://spideroak.one/index.md): Secure, reliable backup that protects your most important files from data loss, ransomware, and today’s fast-evolving cyber threats without compromising your privacy.
+- [Law Enforcement Information Request](https://spideroak.one/law-enforcement.md): Submit legal requests for user information to SpiderOak's Legal Department. Learn about our law enforcement information request process and contact details.
+- [Privacy Policy](https://spideroak.one/privacy-policy.md): Read SpiderOak's privacy policy to understand how we collect, use, and protect your data. We never sell your information or share it with advertisers.
+- [Release Notes](https://spideroak.one/release-notes.md): Browse release notes for SpiderOak software, including updates, fixes, and improvements across all supported platforms and versions.
+- [Security Response](https://spideroak.one/security-response.md): Report security issues to SpiderOak. Our security team responds within 24 hours. View security updates and vulnerability disclosures.
+- [Terms and Conditions](https://spideroak.one/terms-and-conditions.md): Read SpiderOakONE's Terms and Conditions covering scope of services, payment terms, client responsibilities, confidentiality, and intellectual property.
+- [Transparency Report](https://spideroak.one/transparency.md): SpiderOak's transparency report: 0 search warrants, 0 court orders, 0 subpoenas, 0 national security letters. See our commitment to user privacy.

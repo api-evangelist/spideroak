@@ -1,0 +1,81 @@
+generated: '2026-08-29'
+method: derived
+source: capi/spideroak-aranya-client.h (published C API), https://aranya-project.github.io/technical-apis
+provider: SpiderOak
+status: candidate
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+note: SpiderOak ships NO MCP server, hosted or local. Searched the aranya-project org (23 repos), the SpiderOak
+  org (115 repos), the Aranya docs site, spideroak.com and the npm registry; no @spideroak/* or @aranya/* MCP package
+  and no mcp.spideroak.com / mcp.aranya endpoint exists. No MCPServer pointer is emitted in apis.yml — this file
+  records a derived candidate surface only, so that a future agent-facing wrapper has a starting point, and it is
+  explicitly not evidence of an agent surface. The tools below are named after real public C API functions (grepped
+  from the header, never invented); their input schemas would have to be read from the Doxygen signatures, which
+  is why no inputSchema is asserted here.
+transport_note: 'An MCP server for Aranya would be unusual in one respect worth recording: the client talks to a
+  local daemon over a Unix domain socket, so any MCP server would have to run local-stdio on the same host as the
+  daemon. A remote hosted MCP endpoint is not architecturally available without SpiderOak first shipping a network-facing
+  daemon API, which it does not.'
+tool_count: 14
+tools:
+- name: create_team
+  backing: aranya_create_team
+  category: team
+  consequence: write
+- name: add_team
+  backing: aranya_add_team
+  category: team
+  consequence: write
+- name: close_team
+  backing: aranya_close_team
+  category: team
+  consequence: destructive
+- name: list_team_devices
+  backing: aranya_team_devices
+  category: team
+  consequence: read
+- name: add_device_to_team
+  backing: aranya_add_device_to_team
+  category: device
+  consequence: write
+- name: remove_device_from_team
+  backing: aranya_remove_device_from_team
+  category: device
+  consequence: destructive
+- name: list_team_roles
+  backing: aranya_team_roles
+  category: role
+  consequence: read
+- name: assign_role
+  backing: aranya_assign_role
+  category: role
+  consequence: write
+- name: revoke_role
+  backing: aranya_revoke_role
+  category: role
+  consequence: write
+- name: query_role_permissions
+  backing: aranya_query_role_perms
+  category: role
+  consequence: read
+- name: list_team_labels
+  backing: aranya_team_labels
+  category: label
+  consequence: read
+- name: assign_label
+  backing: aranya_assign_label
+  category: label
+  consequence: write
+- name: add_sync_peer
+  backing: aranya_add_sync_peer
+  category: sync
+  consequence: write
+- name: sync_now
+  backing: aranya_sync_now
+  category: sync
+  consequence: write

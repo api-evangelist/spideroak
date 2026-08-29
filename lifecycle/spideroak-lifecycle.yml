@@ -1,0 +1,60 @@
+generated: '2026-08-29'
+method: searched
+source: https://aranya-project.github.io/release-process/, https://aranya-project.github.io/release-security-controls/,
+  https://github.com/aranya-project/aranya/releases, https://raw.githubusercontent.com/aranya-project/.github/main/SECURITY.md,
+  https://spideroak.com/release-notes/
+provider: SpiderOak
+api: Aranya Client API
+versioning:
+  scheme: semver
+  current_version: 7.0.1
+  current_released: '2026-08-12'
+  distribution: crates.io (31 crates) + GitHub release assets (13 per release, incl. the C header and prebuilt libs)
+  note: The client/daemon/keygen/util crates version in lockstep at 7.0.1; aranya-core component crates version
+    independently (aranya-core 2.0.0, aranya-runtime 0.25.0, aranya-policy-vm 0.24.0, ...).
+release_policy:
+  published: true
+  cadence: Major releases generally every 6 weeks; special/patch releases between them for feature sets, security
+    vulnerabilities and critical bugs.
+  docs: https://aranya-project.github.io/release-process/
+  quote: Major releases will generally occur on a 6-week cadence. Special releases or patch releases may also occur
+    between major releases to include certain feature sets or address security vulnerabilities and critical bugs.
+  controls: https://aranya-project.github.io/release-security-controls/
+  controls_note: Branch protections, CI/CD workflows, environment protections and secrets management are documented
+    as securing the release pipeline and doubling as the automated QA process.
+support_policy:
+  published: true
+  statement: The latest version or release is supported.
+  source: https://raw.githubusercontent.com/aranya-project/.github/main/SECURITY.md
+  implication: No LTS branch and no back-porting commitment beyond the latest release; v4.1.1 (2026-02-03) shows
+    a patch release cut specifically for RUSTSEC-2026-0007 as a defensive measure.
+deprecation_policy:
+  published: false
+  note: No deprecation policy, no Sunset/Deprecation header convention (there is no HTTP surface to carry them),
+    and no published removal timeline were found. Breaking changes are signalled only through the SemVer major bump
+    and the release notes prose (e.g. v2.0.0 "AQC channel deletion w/ PSK zeroization (breaking API change)"). NO
+    Deprecation pointer is emitted in apis.yml.
+  probed:
+  - https://aranya-project.github.io/release-process/
+  - https://github.com/aranya-project/aranya/releases
+status_page:
+  published: false
+  note: No status page exists. status.spideroak.com does not resolve (NXDOMAIN, 2026-08-29) and no statuspage.io/instatus/betteruptime
+    property was found on spideroak.com, spideroak.one or the Aranya docs site. This is defensible for a self-hosted
+    library — there is no SpiderOak-operated endpoint whose uptime a customer depends on — so NO StatusPage pointer
+    is emitted.
+  probed:
+  - host: status.spideroak.com
+    result: NXDOMAIN
+sla:
+  published: false
+  note: Enterprise support is sold ("Technical Support (phone, email, integration)" in the Team & Enterprise tier)
+    but no SLA document is published; terms are at https://spideroak.com/service-agreement/.
+experimental_features:
+  note: 'Aranya gates immature surface behind Cargo feature flags rather than versioned deprecation: afc and preview
+    (v3.0.0, AFC), aqc + experimental (AQC), preview (general-purpose custom roles, v4.0.0). ARANYA_ERROR_NOT_ENABLED
+    is the runtime signal that a feature flag is off.'
+legacy_products:
+  note: SpiderOak also maintains a dated release-notes index for its consumer/legacy line at https://spideroak.com/release-notes/
+    covering SpiderOak ONE Backup (latest 7.5.2, 2025-04-16), CrossClave (last 22.0, 2022-07-05), Groups, Share,
+    Semaphor and Encryptr. CrossClave, Share, Semaphor and Encryptr show no releases since 2022 or earlier.

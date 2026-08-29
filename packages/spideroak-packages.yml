@@ -1,0 +1,429 @@
+generated: '2026-08-29'
+method: searched
+source: https://crates.io/api/v1/crates/<name> (registry metadata, unauthenticated) cross-checked against https://raw.githubusercontent.com/aranya-project/aranya-core/main/Status.md
+  and https://aranya-project.github.io/technical-apis/rust-api
+provider: SpiderOak
+note: 'SpiderOak distributes its developer surface as the open-source Aranya project. The only first-party package
+  registry it publishes to is crates.io (Rust). The C API is NOT distributed through a package registry: it is a
+  cbindgen-generated header (aranya-client.h) plus prebuilt shared libraries attached as assets to each GitHub release
+  of aranya-project/aranya, so it has no registry metadata endpoint to query and its version is read from the release
+  tag instead. No first-party SpiderOak or Aranya package was found on npm, PyPI, RubyGems, Packagist, NuGet, Maven
+  Central or pkg.go.dev (npm carries an unrelated "aranya" 0.1.6 with no description and no repository link — not
+  first-party, not recorded here).'
+registries_searched:
+- registry: crates.io
+  result: 31 first-party crates found
+- registry: npm
+  result: no first-party package; unrelated "aranya" 0.1.6 rejected as not first-party
+- registry: PyPI
+  result: none (spideroak, flow-python, aranya all 404 on pypi.org/pypi/<name>/json)
+- registry: RubyGems
+  result: none
+- registry: Maven Central
+  result: none
+- registry: NuGet
+  result: none
+- registry: pkg.go.dev
+  result: none
+- registry: Packagist
+  result: none
+package_count: 33
+official_count: 33
+packages:
+- name: aranya-afc-util
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-afc-util
+  docs: https://docs.rs/aranya-afc-util
+  version: 0.26.0
+  published: '2026-08-25'
+  downloads: 77740
+  repository: https://github.com/aranya-project/aranya-core
+  description: Utilities for using Aranya Fast Channels
+  role: internal/component
+- name: aranya-capi-codegen
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-capi-codegen
+  docs: https://docs.rs/aranya-capi-codegen
+  version: 0.7.1
+  published: '2026-03-18'
+  downloads: 94480
+  repository: https://github.com/aranya-project/aranya-core
+  description: Code generation for Aranya's C API tooling
+  role: internal/component
+- name: aranya-capi-core
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-capi-core
+  docs: https://docs.rs/aranya-capi-core
+  version: 0.8.2
+  published: '2026-08-25'
+  downloads: 94821
+  repository: https://github.com/aranya-project/aranya-core
+  description: Aranya's C API tooling
+  role: internal/component
+- name: aranya-capi-macro
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-capi-macro
+  docs: https://docs.rs/aranya-capi-macro
+  version: 0.7.1
+  published: '2026-03-18'
+  downloads: 93670
+  repository: https://github.com/aranya-project/aranya-core
+  description: Proc macros for Aranya's C API tooling
+  role: internal/component
+- name: aranya-certgen
+  registry: crates.io
+  language: Rust
+  official: true
+  version: null
+  published: null
+  note: Named in the Aranya repository/workspace but not published to crates.io; crates.io API returned 404 on 2026-08-29.
+- name: aranya-client
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-client
+  docs: https://docs.rs/aranya-client
+  version: 7.0.1
+  published: '2026-08-12'
+  downloads: 7437
+  repository: https://github.com/aranya-project/aranya
+  description: Client library for using Aranya
+  role: client-facing
+- name: aranya-core
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-core
+  docs: https://docs.rs/aranya-core
+  version: 2.0.0
+  published: '2026-08-25'
+  downloads: 81
+  repository: https://github.com/aranya-project/aranya-core
+  description: Stable public API for the Aranya runtime
+  role: client-facing
+- name: aranya-crypto
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-crypto
+  docs: https://docs.rs/aranya-crypto
+  version: 0.15.0
+  published: '2026-08-25'
+  downloads: 123776
+  repository: https://github.com/aranya-project/aranya-core
+  description: The Aranya Cryptography Engine
+  role: internal/component
+- name: aranya-crypto-ffi
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-crypto-ffi
+  docs: https://docs.rs/aranya-crypto-ffi
+  version: 0.24.0
+  published: '2026-08-25'
+  downloads: 117778
+  repository: https://github.com/aranya-project/aranya-core
+  description: The crypto FFI for Aranya Policy
+  role: internal/component
+- name: aranya-daemon
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-daemon
+  docs: https://docs.rs/aranya-daemon
+  version: 7.0.1
+  published: '2026-08-12'
+  downloads: 7266
+  repository: https://github.com/aranya-project/aranya
+  description: Daemon process for syncing with Aranya peers and maintaining the DAG
+  role: client-facing
+- name: aranya-daemon-api
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-daemon-api
+  docs: https://docs.rs/aranya-daemon-api
+  version: 7.0.1
+  published: '2026-08-12'
+  downloads: 9659
+  repository: https://github.com/aranya-project/aranya
+  description: IPC API between the Aranya client and daemon
+  role: client-facing
+- name: aranya-device-ffi
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-device-ffi
+  docs: https://docs.rs/aranya-device-ffi
+  version: 0.24.0
+  published: '2026-08-25'
+  downloads: 117762
+  repository: https://github.com/aranya-project/aranya-core
+  description: The device FFI for Aranya Policy
+  role: internal/component
+- name: aranya-envelope-ffi
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-envelope-ffi
+  docs: https://docs.rs/aranya-envelope-ffi
+  version: 0.24.0
+  published: '2026-08-25'
+  downloads: 117736
+  repository: https://github.com/aranya-project/aranya-core
+  description: The envelope FFI for Aranya Policy
+  role: internal/component
+- name: aranya-fast-channels
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-fast-channels
+  docs: https://docs.rs/aranya-fast-channels
+  version: 0.20.0
+  published: '2026-08-25'
+  downloads: 87221
+  repository: https://github.com/aranya-project/aranya-core
+  description: High throughput, low latency encryption protected by Aranya Policy
+  role: internal/component
+- name: aranya-id
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-id
+  docs: https://docs.rs/aranya-id
+  version: 0.3.0
+  published: '2026-08-25'
+  downloads: 70077
+  repository: https://github.com/aranya-project/aranya-core
+  description: Aranya ID types
+  role: internal/component
+- name: aranya-idam-ffi
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-idam-ffi
+  docs: https://docs.rs/aranya-idam-ffi
+  version: 0.24.0
+  published: '2026-08-25'
+  downloads: 117858
+  repository: https://github.com/aranya-project/aranya-core
+  description: The IDAM FFI for Aranya Policy
+  role: internal/component
+- name: aranya-keygen
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-keygen
+  docs: https://docs.rs/aranya-keygen
+  version: 7.0.1
+  published: '2026-08-12'
+  downloads: 6964
+  repository: https://github.com/aranya-project/aranya
+  description: Utilities for generating crypto keys
+  role: client-facing
+- name: aranya-libc
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-libc
+  docs: https://docs.rs/aranya-libc
+  version: 0.4.1
+  published: '2026-08-25'
+  downloads: 113824
+  repository: https://github.com/aranya-project/aranya-core
+  description: A wrapper around parts of libc for Aranya Core
+  role: internal/component
+- name: aranya-perspective-ffi
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-perspective-ffi
+  docs: https://docs.rs/aranya-perspective-ffi
+  version: 0.24.0
+  published: '2026-08-25'
+  downloads: 117801
+  repository: https://github.com/aranya-project/aranya-core
+  description: The perspective FFI for Aranya Policy
+  role: internal/component
+- name: aranya-policy-ast
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-policy-ast
+  docs: https://docs.rs/aranya-policy-ast
+  version: 0.16.0
+  published: '2026-08-25'
+  downloads: 119975
+  repository: https://github.com/aranya-project/aranya-core
+  description: The Aranya Policy Language AST
+  role: internal/component
+- name: aranya-policy-compiler
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-policy-compiler
+  docs: https://docs.rs/aranya-policy-compiler
+  version: 0.25.0
+  published: '2026-08-25'
+  downloads: 118216
+  repository: https://github.com/aranya-project/aranya-core
+  description: The Aranya Policy Compiler
+  role: internal/component
+- name: aranya-policy-derive
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-policy-derive
+  docs: https://docs.rs/aranya-policy-derive
+  version: 0.18.0
+  published: '2026-08-25'
+  downloads: 120612
+  repository: https://github.com/aranya-project/aranya-core
+  description: Proc macros for generating Aranya Policy Language FFIs
+  role: internal/component
+- name: aranya-policy-ifgen
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-policy-ifgen
+  docs: https://docs.rs/aranya-policy-ifgen
+  version: 0.25.0
+  published: '2026-08-25'
+  downloads: 118955
+  repository: https://github.com/aranya-project/aranya-core
+  description: Tools for generating Rust interfaces to Aranya Policies
+  role: internal/component
+- name: aranya-policy-ifgen-build
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-policy-ifgen-build
+  docs: https://docs.rs/aranya-policy-ifgen-build
+  version: 0.18.0
+  published: '2026-08-25'
+  downloads: 115395
+  repository: https://github.com/aranya-project/aranya-core
+  description: Code generator for aranya-policy-ifgen
+  role: internal/component
+- name: aranya-policy-ifgen-macro
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-policy-ifgen-macro
+  docs: https://docs.rs/aranya-policy-ifgen-macro
+  version: 0.8.0
+  published: '2026-05-22'
+  downloads: 113576
+  repository: https://github.com/aranya-project/aranya-core
+  description: Proc macros for aranya-policy-ifgen
+  role: internal/component
+- name: aranya-policy-lang
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-policy-lang
+  docs: https://docs.rs/aranya-policy-lang
+  version: 0.17.0
+  published: '2026-08-25'
+  downloads: 119915
+  repository: https://github.com/aranya-project/aranya-core
+  description: The Aranya Policy Language parser
+  role: internal/component
+- name: aranya-policy-module
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-policy-module
+  docs: https://docs.rs/aranya-policy-module
+  version: 0.23.0
+  published: '2026-08-25'
+  downloads: 121954
+  repository: https://github.com/aranya-project/aranya-core
+  description: The Aranya Policy module format
+  role: internal/component
+- name: aranya-policy-text
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-policy-text
+  docs: https://docs.rs/aranya-policy-text
+  version: 0.1.5
+  published: '2026-08-25'
+  downloads: 94946
+  repository: https://github.com/aranya-project/aranya-core
+  description: The Aranya Policy Language textual types
+  role: internal/component
+- name: aranya-policy-text-macro
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-policy-text-macro
+  docs: https://docs.rs/aranya-policy-text-macro
+  version: 0.1.0
+  published: '2025-06-13'
+  downloads: 89672
+  repository: https://github.com/aranya-project/aranya-core
+  description: Proc macros for constructing text and identifiers
+  role: internal/component
+- name: aranya-policy-vm
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-policy-vm
+  docs: https://docs.rs/aranya-policy-vm
+  version: 0.24.0
+  published: '2026-08-25'
+  downloads: 121986
+  repository: https://github.com/aranya-project/aranya-core
+  description: The Aranya Policy Virtual Machine
+  role: internal/component
+- name: aranya-runtime
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-runtime
+  docs: https://docs.rs/aranya-runtime
+  version: 0.25.0
+  published: '2026-08-25'
+  downloads: 116602
+  repository: https://github.com/aranya-project/aranya-core
+  description: The Aranya core runtime
+  role: internal/component
+- name: aranya-tcp-syncer
+  registry: crates.io
+  language: Rust
+  official: true
+  version: null
+  published: null
+  note: Named in the Aranya repository/workspace but not published to crates.io; crates.io API returned 404 on 2026-08-29.
+- name: aranya-util
+  registry: crates.io
+  language: Rust
+  official: true
+  url: https://crates.io/crates/aranya-util
+  docs: https://docs.rs/aranya-util
+  version: 7.0.1
+  published: '2026-08-12'
+  downloads: 8337
+  repository: https://github.com/aranya-project/aranya
+  description: Utilities needed by other Aranya crates
+  role: client-facing
+distributions:
+- name: aranya-client C library + header
+  registry: cdn
+  language: C
+  official: true
+  version: v7.0.1
+  published: '2026-08-12'
+  url: https://github.com/aranya-project/aranya/releases
+  note: Distributed as GitHub release assets (13 assets on v7.0.1), not through a package registry. Version and
+    date read from the release tag itself, which is pinned — a consumer downloading a release asset knows exactly
+    what they are getting.

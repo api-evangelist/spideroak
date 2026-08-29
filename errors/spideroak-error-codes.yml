@@ -1,0 +1,94 @@
+generated: '2026-08-29'
+method: derived
+source: capi/spideroak-aranya-client.h (verbatim copy of https://github.com/aranya-project/aranya/blob/main/crates/aranya-client-capi/output/aranya-client.h),
+  cross-read against https://aranya-project.github.io/technical-apis/c-api
+provider: SpiderOak
+api: Aranya Client API
+format: c-enum
+note: 'Aranya does not publish an HTTP API, so there is no RFC 9457 problem+json surface and no HTTP status mapping.
+  Its error contract is the AranyaError enum in the published C header: every public function returns AranyaError,
+  and the header states that anything other than ARANYA_ERROR_SUCCESS is a failure. Titles below are the provider''s
+  own Doxygen comments, copied verbatim. The remediation column is API Evangelist''s derivation from the header
+  and the published docs/release notes, not provider text.'
+envelope:
+  return_value: AranyaError (uint32_t) returned by every public aranya_* function
+  extended_error: AranyaExtError — an opaque handle populated by the *_ext variant of each function. aranya_ext_error_msg
+    / aranya_ext_error_msg_ext copy a human-readable message out of it; aranya_ext_error_init and aranya_ext_error_cleanup
+    manage its lifetime.
+  success_sentinel: ARANYA_ERROR_SUCCESS
+error_count: 17
+errors:
+- code: ARANYA_ERROR_SUCCESS
+  title: Success.
+  class: success
+  remediation: No action. Returned on every successful call; the C API contract is that any other value means the
+    call failed.
+- code: ARANYA_ERROR_BUG
+  title: Internal bug discovered.
+  class: error
+  remediation: Report to the Aranya project. This code is reserved for an internal invariant violation, not caller
+    error.
+- code: ARANYA_ERROR_TIMEOUT
+  title: Timed out.
+  class: error
+  remediation: Retry. IPC timeouts to the daemon were increased in v5.0.0 to prevent spurious timeouts during long-running
+    operations.
+- code: ARANYA_ERROR_INVALID_ARGUMENT
+  title: Invalid argument.
+  class: error
+  remediation: Caller error — check the argument against the Doxygen signature before retrying. Not retryable unchanged.
+- code: ARANYA_ERROR_NOT_ENABLED
+  title: Component is not enabled.
+  class: error
+  remediation: The component is behind a Cargo feature flag (e.g. afc, aqc, preview). Rebuild with the feature enabled.
+- code: ARANYA_ERROR_BUFFER_TOO_SMALL
+  title: Buffer is too small.
+  class: error
+  remediation: Re-call with a larger buffer. The header documents the required length constants (ARANYA_ID_STR_LEN,
+    ARANYA_AFC_CHANNEL_OVERHEAD).
+- code: ARANYA_ERROR_INVALID_UTF8
+  title: Invalid UTF-8.
+  class: error
+  remediation: Caller error — the supplied byte string is not valid UTF-8.
+- code: ARANYA_ERROR_INVALID_ADDR
+  title: Invalid Address.
+  class: error
+  remediation: Caller error — a peer or sync address failed to parse.
+- code: ARANYA_ERROR_IPC
+  title: Could not send request to daemon.
+  class: error
+  remediation: The local daemon is unreachable. Confirm aranya-daemon is running and that the UDS path set via aranya_client_config_builder_set_daemon_uds_path
+    matches the daemon config.
+- code: ARANYA_ERROR_ARANYA
+  title: An Aranya error.
+  class: error
+  remediation: A policy or runtime rejection from Aranya Core. Use aranya_ext_error_msg to read the extended message.
+- code: ARANYA_ERROR_WOULD_BLOCK
+  title: Tried to poll an endpoint but nothing received yet.
+  class: error
+  remediation: Non-fatal. Nothing has arrived on the polled endpoint yet; poll again.
+- code: ARANYA_ERROR_WRONG_CHANNEL_TYPE
+  title: Wrong channel type.
+  class: error
+  remediation: Caller used a send channel where a receive channel was required, or vice versa.
+- code: ARANYA_ERROR_CLOSED
+  title: A connection got unexpectedly closed.
+  class: error
+  remediation: The connection closed unexpectedly. Re-establish the channel or sync peer.
+- code: ARANYA_ERROR_CONFIG
+  title: Unable to create configuration info.
+  class: error
+  remediation: A config builder failed to build. Check that all required setters were called before *_config_build.
+- code: ARANYA_ERROR_SERIALIZATION
+  title: Serialization error.
+  class: error
+  remediation: Serialization failure crossing the FFI/IPC boundary.
+- code: ARANYA_ERROR_DOES_NOT_EXIST
+  title: The requested resource does not exist.
+  class: error
+  remediation: The requested team, device, role, label or channel is not present in the current graph state. May
+    resolve after a sync.
+- code: ARANYA_ERROR_OTHER
+  title: Some other error occurred.
+  class: error
+  remediation: Catch-all. Use aranya_ext_error_msg for the underlying message.

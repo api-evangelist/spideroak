@@ -1,0 +1,36 @@
+generated: '2026-08-29'
+method: searched
+source: https://aranya-project.github.io/technical-apis, https://aranya-project.github.io/getting-started, capi/spideroak-aranya-client.h,
+  https://github.com/aranya-project/aranya/releases
+provider: SpiderOak
+api: Aranya Client API
+limit_count: 0
+note: 'Zero published rate limits, and in this case that is a property of the architecture rather than an omission:
+  Aranya is a library talking to a daemon the customer runs on their own hardware, so there is no SpiderOak-operated
+  quota to enforce, no 429, and no X-RateLimit-*/RateLimit-*/Retry-After headers because there are no HTTP responses
+  at all. Probed the technical-apis pages, the getting-started walkthrough, the full C header and every release
+  note without finding a documented limit, throttle or backpressure quota.'
+limits: []
+response_headers: []
+status_code_on_exhaustion: null
+operational_bounds_published:
+- name: sync interval
+  description: 'Sync frequency is caller-configured, not provider-limited: aranya_sync_peer_config_builder_set_interval,
+    plus sync_now / sync_later / sync_on_hello modes.'
+  source: capi/spideroak-aranya-client.h
+- name: hello subscription pacing
+  description: aranya_hello_subscription_config_builder_set_periodic_interval, _set_graph_change_debounce and _set_expiration
+    bound how often hello-driven syncs fire — a caller-side backpressure control, not a server quota.
+  source: capi/spideroak-aranya-client.h
+- name: IPC timeout
+  description: Client-to-daemon IPC has a timeout that surfaces as ARANYA_ERROR_TIMEOUT; v5.0.0 increased it "to
+    prevent timeouts during long-running operations". The value is not published.
+  source: https://github.com/aranya-project/aranya/releases/tag/v5.0.0
+- name: footprint targets
+  description: 'Published resource envelope rather than a rate limit: "<1.5 MB Binary and <1.5 MB RAM", and AFC
+    adds ARANYA_AFC_CHANNEL_OVERHEAD (24) bytes per channel message.'
+  source: https://aranya-project.github.io/getting-started
+- name: daemon device cardinality
+  description: '"Note: The Aranya Daemon supports a single device." A hard architectural bound, published in the
+    daemon README.'
+  source: https://github.com/aranya-project/aranya/blob/main/crates/aranya-daemon/README.md

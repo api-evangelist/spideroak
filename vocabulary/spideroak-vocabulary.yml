@@ -1,0 +1,230 @@
+generated: '2026-08-29'
+method: searched
+source: https://aranya-project.github.io/glossary
+name: Aranya Glossary
+publisher: SpiderOak / the Aranya Project
+note: SpiderOak publishes a real, maintained domain vocabulary for Aranya on its documentation site. Captured verbatim
+  from the published glossary page; definitions are the provider's own words with inline links flattened. Terms
+  whose published entry is a bare cross-reference with no prose on the glossary page itself (e.g. "Aranya Fast Channels",
+  which defers to /core-concepts/channel/afc) are omitted rather than paraphrased.
+term_count: 56
+terms:
+- term: Action
+  anchor: https://aranya-project.github.io/glossary#action
+  definition: An action is a generated function defined in the policy language that can affect state. Actions create
+    new commands to be evaluated by the policy and, if valid, added to the graph (DAG). When new commands arrive
+    (from either local creation, or synced from other nodes), the policy for those commands is evaluated, which
+    may produce fact changes and effects. Actions can be thought of as providing a contract (along with effects)
+    to the application which is implemented by the policy.
+- term: Attribute-Based Access Control (ABAC)
+  anchor: https://aranya-project.github.io/glossary#abac
+  definition: A version of Identity Access Management that uses attributes over defined roles to grant an entity
+    or group of entities’ permission(s) to interact with a graph.
+- term: Aranya
+  anchor: https://aranya-project.github.io/glossary#aranya
+  definition: Manages distributed data by representing state as a graph , which contains commands and factDBs ,
+    that is evaluated by a policy . Aranya includes components for evaluating policy, cryptography, storage, conflict
+    resolution and syncing. Find more details in the Aranya spec .
+- term: Abstract Syntax Tree (AST)
+  anchor: https://aranya-project.github.io/glossary#ast
+  definition: An abstract syntax tree, is a tree data structure that represents code. It’s used in the policy engine
+    to parse the policy language. Learn more about the AST data structure .
+- term: Audit and Monitoring
+  anchor: https://aranya-project.github.io/glossary#audit-monitoring
+  definition: Regularly review and monitor activities and detect suspicious behavior. Use network monitoring tools
+    to track access patterns and machine learning algorithms to detect anomalies.
+- term: Bandwidth
+  anchor: https://aranya-project.github.io/glossary#bandwidth
+  definition: How much data can be theoretically transferred over the network over a certain period of time. Read
+    more about bandwidth .
+- term: Braid
+  anchor: https://aranya-project.github.io/glossary#braid
+  definition: The braid algorithm enforces deterministic ordering while merging two DAGs . A set of commands forms
+    a DAG.
+- term: PSK
+  anchor: https://aranya-project.github.io/glossary#psk
+  definition: A PSK (pre-shared key) is a key shared by two parties. The QUIC syncer uses PSKs instead of certificates
+    when configuring TLS for the QUIC transport.
+- term: Continuous Integration and Continuous Delivery (CI/CD)
+  anchor: https://aranya-project.github.io/glossary#cicd
+  definition: A development best practice that ensures software is tested, integrated, and deliverable/deployable
+    with each commit and pull request against the repositories. Read more about CICD .
+- term: Command
+  anchor: https://aranya-project.github.io/glossary#command
+  definition: Instruction given by a device to perform a specific task. It is the object that is sent and stored
+    to denote individual actions by different devices, as defined possible by the policy . For example, it could
+    be to add an entity to a team, whereby the command object itself indicates the action that was performed and
+    other necessary information, such as the credentials of the newly added entity.
+- term: Crypto Engine
+  anchor: https://aranya-project.github.io/glossary#crypto-engine
+  definition: Provides a set of APIs for encryption, decryption, and key authentication.
+- term: Directed Acyclic Graph (DAG)
+  anchor: https://aranya-project.github.io/glossary#dag
+  definition: We use this term interchangeably with the Graph . Read more about directed acyclic graphs .
+- term: Device
+  anchor: https://aranya-project.github.io/glossary#device
+  definition: Represents an instance and has an identity associated to it, as well as other crypto material which
+    govern how it behaves on the endpoint.
+- term: Effect
+  anchor: https://aranya-project.github.io/glossary#effect
+  definition: Data, as defined in a policy, that may be emitted to clients when a command is processed.
+- term: Endpoint
+  anchor: https://aranya-project.github.io/glossary#endpoint
+  definition: Where the Aranya software is deployed. This can be a piece of hardware (e.g. spacecraft payload, drone,
+    cellular device, etc.) or software (e.g. application).
+- term: Ephemeral Session
+  anchor: https://aranya-project.github.io/glossary#ephemeral-session
+  definition: In ephemeral sessions, commands are locally processed by a policy but do not persist to the graph
+    . An ephemeral session only lasts as long as the lifetime of the Aranya daemon that it’s running in. Once a
+    daemon stops/restarts, the session will no longer be available. Read the sessions spec for more details.
+- term: Fact
+  anchor: https://aranya-project.github.io/glossary#fact
+  definition: Key-value pair that is produced by processing a command .
+- term: FactDB
+  anchor: https://aranya-project.github.io/glossary#factdb
+  definition: Fact storage within the graph at any given command. The factDB is accessed from a perspective of the
+    graph , therefore, its values change depending on the specific command or point-in-time the graph is evaluated.
+- term: Finalization
+  anchor: https://aranya-project.github.io/glossary#finalization
+  definition: Finalization is Aranya’s mechanism for achieving global consistency. If a command A has been finalized
+    in some set of commands S, then all commands appearing in the braid of S prior to A must be ancestors of A.
+    Conversely, all commands that appear in the braid after A are not ancestors of A.
+- term: Foreign Function Interface (FFI)
+  anchor: https://aranya-project.github.io/glossary#ffi
+  definition: Mechanism to perform operations that are written or compiled in a different programming language.
+    Some examples include policy code calling functions written in Rust and Rust code calling functions written
+    in C. More details on Rust FFIs can be found in the Rust by Example Book.
+- term: FFI Module
+  anchor: https://aranya-project.github.io/glossary#ffi-module
+  definition: Set of FFI operations that can be imported by a policy .
+- term: FFI Schema
+  anchor: https://aranya-project.github.io/glossary#ffi-schema
+  definition: Static description of the names and function signatures provided by FFI modules . This allows the
+    policy compiler to validate the FFI is being used correctly in policy code.
+- term: Graph
+  anchor: https://aranya-project.github.io/glossary#graph
+  definition: Directed acyclic graph (DAG) where the nodes are commands , which represents the total ordering of
+    commands. Each command in the graph may contain a new version of its parent’s factDB and is connected by a line
+    to the command that occurred immediately before it, as seen from the device’s local state.
+- term: Identity and Access Management (IdAM)
+  anchor: https://aranya-project.github.io/glossary#idam
+  definition: A framework for controlling access to a resource based on the identity of a device. Read more about
+    Identity and Access Management .
+- term: Instance
+  anchor: https://aranya-project.github.io/glossary#Instance
+  definition: Individual deployment of the Aranya software. A single endpoint can have one or many instances.
+- term: Label
+  anchor: https://aranya-project.github.io/glossary#label
+  definition: An identifier that binds a data plane channel to a set of Aranya policy rules, ensuring the devices
+    on either side of the channel are authorized to transmit data via the channel according to rules defined by
+    the policy.
+- term: Latency
+  anchor: https://aranya-project.github.io/glossary#latency
+  definition: Amount of time it takes data to travel from one point to another. Read more about latency .
+- term: Least Privilege Access
+  anchor: https://aranya-project.github.io/glossary#least-privilege-access
+  definition: This IDAM policy cornerstone gives devices and systems only the minimal access needed to perform their
+    tasks, reducing the risk of unauthorized access or activities.
+- term: Linear Storage
+  anchor: https://aranya-project.github.io/glossary#linear-storage
+  definition: An implementation of the storage APIs using a file-like byte storage interface that is suitable for
+    many different systems without making many assumptions on the underlying storage.
+- term: Memory Storage
+  anchor: https://aranya-project.github.io/glossary#memory-storage
+  definition: An implementation of the storage APIs that relies on the system’s global allocator. This is a simpler
+    implementation that is meant to be easy to verify its correctness. This is mostly useful for testing purposes.
+- term: Peer to Peer
+  anchor: https://aranya-project.github.io/glossary#peer-to-peer
+  definition: Allows computers to share access by acting as a server for each other.
+- term: Perspective
+  anchor: https://aranya-project.github.io/glossary#perspective
+  definition: In storage, a version of the graph from a specific command , or point-in-time.
+- term: Policy
+  anchor: https://aranya-project.github.io/glossary#policy
+  definition: Defines rules for evaluating actions to publish commands on the graph , resulting in effects emitted
+    to Aranya clients. The policy can be thought of as the execution and validation of business logic in Aranya.
+    More information on the Aranya policy language can be found in the specification .
+- term: Policy Compiler
+  anchor: https://aranya-project.github.io/glossary#policy-compiler
+  definition: Compiles policy code into a module to be consumed by the policy VM .
+- term: Policy Document
+  anchor: https://aranya-project.github.io/glossary#policy-document
+  definition: Markdown file that describes and implements the objects and operations used to create, update, and
+    delete state, including a graph and factDB .
+- term: Policy Engine
+  anchor: https://aranya-project.github.io/glossary#policy-engine
+  definition: An implementation used as part of Aranya client state to store and retrieve policies.
+- term: Policy Module
+  anchor: https://aranya-project.github.io/glossary#policy-module
+  definition: A policy module consists of compiled policy code.
+- term: Policy VM
+  anchor: https://aranya-project.github.io/glossary#policy-vm
+  definition: Policy virtual machine. Consumes a compiled policy module to execute and perform policy decisions.
+- term: QUIC
+  anchor: https://aranya-project.github.io/glossary#quic
+  definition: A general-purpose transport layer network protocol, that utilizes several multiplexed UDP connections
+    and encrypts traffic with TLS. Read more about the QUIC protocol .
+- term: Role-Based Access Control (RBAC)
+  anchor: https://aranya-project.github.io/glossary#rbac
+  definition: A version of Identity Access and Management that uses roles to grant a device or group of devices
+    permission(s) to interact with a graph .
+- term: Revocation
+  anchor: https://aranya-project.github.io/glossary#revocation
+  definition: Removal of access to a specific data set.
+- term: Role
+  anchor: https://aranya-project.github.io/glossary#role
+  definition: Defines capabilities a device or group of devices may be assigned to perform operations in a policy
+    that uses an RBAC system.
+- term: Round-Trip Time (RTT)
+  anchor: https://aranya-project.github.io/glossary#rtt
+  definition: How long it takes data to travel from one point to another and back. Read more about round-trip delay
+    .
+- term: Segment
+  anchor: https://aranya-project.github.io/glossary#segment
+  definition: In storage, a nonempty sequence of commands that has been persisted to the graph.
+- term: 'Secure Authentication and Authorization:'
+  anchor: https://aranya-project.github.io/glossary#secure-authentication-and-authorization
+  definition: Implement strong authentication methods and control what authenticated devices can do. Consider multi-factor
+    authentication and digital certificates to ensure only authorized individuals have access.
+- term: Segmentation
+  anchor: https://aranya-project.github.io/glossary#segmentation
+  definition: Data segmentation is the process of organizing data into groups based on shared characteristics or
+    access/sensitivity levels.
+- term: Segregation of Duties
+  anchor: https://aranya-project.github.io/glossary#segregation-of-duties
+  definition: Responsibilities should be distributed among different individuals to prevent fraud or error. This
+    is especially important in mesh networks, where one error can have significant consequences.
+- term: State
+  anchor: https://aranya-project.github.io/glossary#state
+  definition: All the information that defines how the software platform is currently functioning, how it can change,
+    and how it should behave in different scenarios.
+- term: Sync
+  anchor: https://aranya-project.github.io/glossary#sync
+  definition: Implementations that allow remote Aranya clients to share state. More details on syncing in Aranya
+    can be found in the sync specification.
+- term: Transmission Control Protocol (TCP)
+  anchor: https://aranya-project.github.io/glossary#tcp
+  definition: Transport that supports resending dropped packets. Read more about tcp .
+- term: Team
+  anchor: https://aranya-project.github.io/glossary#team
+  definition: A group of devices that interact over a graph . Sometimes used interchangeably with graph, as a team
+    is associated with a single graph.
+- term: Throughput
+  anchor: https://aranya-project.github.io/glossary#throughput
+  definition: The amount of data that can actually be transferred over the network over a certain period of time.
+    This is a measurement rather than a theoretical estimate. Read more about throughput .
+- term: Time To Live (TTL)
+  anchor: https://aranya-project.github.io/glossary#ttl
+  definition: This value is set to the number of hops a packet should exist on the network before it is dropped.
+    Read more about ttl .
+- term: User Datagram Protocol (UDP)
+  anchor: https://aranya-project.github.io/glossary#udp
+  definition: A simple connectionless protocol that prioritizes speed over error checking and correction. Read more
+    about udp .
+- term: Unix Domain Socket (UDS)
+  anchor: https://aranya-project.github.io/glossary#uds
+  definition: An endpoint for exchanging data. Read more about UDS .
+- term: Zero-Trust
+  anchor: https://aranya-project.github.io/glossary#zero-trust
+  definition: A cybersecurity approach that requires all entities and devices to be authenticated and authorized
+    before accessing data, endpoints, applications, and services.

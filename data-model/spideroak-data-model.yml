@@ -1,0 +1,218 @@
+generated: '2026-08-29'
+method: derived
+source: capi/spideroak-aranya-client.h (opaque types + accessor functions), cross-read against https://aranya-project.github.io/glossary
+  and https://aranya-project.github.io/core-concepts/
+provider: SpiderOak
+api: Aranya Client API
+note: Derived from the published C header's opaque handle types and their accessor functions, plus the provider
+  glossary. There is no OpenAPI components.schemas to read, so relationships below are inferred from function signatures
+  that take one id and return another (e.g. aranya_team_device_role(team, device) -> role) and from the glossary
+  definitions. Confidence is stated per relationship.
+id_types:
+- name: AranyaId
+  note: Base 32-byte identifier (ARANYA_ID_LEN). String form is ARANYA_ID_STR_LEN chars; converted with aranya_id_to_str
+    / aranya_id_from_str.
+- name: AranyaTeamId
+- name: AranyaDeviceId
+- name: AranyaRoleId
+- name: AranyaLabelId
+- name: AranyaObjectId
+- name: AranyaAfcChannelId
+entities:
+- name: Team
+  id: AranyaTeamId
+  glossary: A group of devices that interact over a graph. Sometimes used interchangeably with graph.
+  operations:
+  - aranya_create_team
+  - aranya_add_team
+  - aranya_remove_team
+  - aranya_close_team
+  - aranya_team_devices
+  - aranya_team_roles
+  - aranya_team_labels
+- name: Device
+  id: AranyaDeviceId
+  glossary: Represents an instance and has an identity associated to it, as well as other crypto material.
+  operations:
+  - aranya_add_device_to_team
+  - aranya_remove_device_from_team
+  - aranya_get_device_id
+  - aranya_team_device_keybundle
+  - aranya_team_device_public_key_bundle
+  - aranya_team_device_role
+  - aranya_team_device_label_assignments
+- name: Role
+  id: AranyaRoleId
+  glossary: Defines capabilities a device or group of devices may be assigned to perform operations.
+  operations:
+  - aranya_create_role
+  - aranya_delete_role
+  - aranya_assign_role
+  - aranya_revoke_role
+  - aranya_change_role
+  - aranya_setup_default_roles
+  - aranya_role_get_id
+  - aranya_role_get_name
+  - aranya_role_get_author
+  fields:
+  - id
+  - name
+  - author (AranyaDeviceId)
+  - rank
+- name: Permission
+  operations:
+  - aranya_add_perm_to_role
+  - aranya_remove_perm_from_role
+  - aranya_query_role_perms
+  - aranya_permission_to_str
+- name: Label
+  id: AranyaLabelId
+  glossary: An identifier that binds a data plane channel to a set of Aranya policy rules.
+  operations:
+  - aranya_create_label
+  - aranya_delete_label
+  - aranya_assign_label
+  - aranya_revoke_label
+  - aranya_label_get_id
+  - aranya_label_get_name
+  - aranya_label_get_author
+  - aranya_team_label
+  - aranya_team_labels
+  - aranya_team_label_exists
+  fields:
+  - id
+  - name
+  - author (AranyaDeviceId)
+- name: AfcSendChannel
+  id: AranyaAfcChannelId
+  operations:
+  - aranya_afc_create_channel
+  - aranya_afc_channel_open
+  - aranya_afc_channel_seal
+  - aranya_afc_send_channel_get_id
+  - aranya_afc_send_channel_get_peer_id
+  - aranya_afc_send_channel_get_label_id
+  - aranya_afc_send_channel_delete
+- name: AfcReceiveChannel
+  id: AranyaAfcChannelId
+  operations:
+  - aranya_afc_accept_channel
+  - aranya_afc_receive_channel_get_id
+  - aranya_afc_receive_channel_get_peer_id
+  - aranya_afc_receive_channel_get_label_id
+  - aranya_afc_receive_channel_delete
+- name: SyncPeer
+  operations:
+  - aranya_add_sync_peer
+  - aranya_remove_sync_peer
+  - aranya_sync_now
+  - aranya_sync_hello_subscribe
+  - aranya_sync_hello_unsubscribe
+- name: KeyBundle
+  operations:
+  - aranya_get_key_bundle
+  - aranya_get_public_key_bundle
+  - aranya_team_device_keybundle
+  - aranya_team_device_public_key_bundle
+- name: Graph (DAG)
+  glossary: Directed acyclic graph where the nodes are commands, representing total order of state.
+  operations: []
+- name: Command
+  glossary: Instruction given by a device to perform a specific task; the object sent and synced.
+  operations: []
+- name: Fact / FactDB
+  glossary: Key-value pair produced by processing a command; FactDB is fact storage within the graph.
+  operations: []
+relationships:
+- from: Team
+  to: Device
+  type: has_many
+  via: aranya_team_devices
+  confidence: high
+- from: Team
+  to: Role
+  type: has_many
+  via: aranya_team_roles
+  confidence: high
+- from: Team
+  to: Label
+  type: has_many
+  via: aranya_team_labels / aranya_team_label
+  confidence: high
+- from: Device
+  to: Team
+  type: belongs_to
+  via: aranya_add_device_to_team
+  confidence: high
+  note: v2.0.0 added support for adding devices to multiple teams, so this is many-to-many in practice.
+- from: Device
+  to: Role
+  type: has_one
+  via: aranya_team_device_role(team, device)
+  confidence: high
+- from: Device
+  to: Label
+  type: has_many
+  via: aranya_team_device_label_assignments(team, device)
+  confidence: high
+- from: Device
+  to: KeyBundle
+  type: has_one
+  via: aranya_team_device_keybundle
+  confidence: high
+- from: Role
+  to: Permission
+  type: has_many
+  via: aranya_query_role_perms
+  confidence: high
+- from: Role
+  to: Device
+  type: belongs_to
+  via: aranya_role_get_author -> AranyaDeviceId
+  confidence: high
+  field: author
+- from: Label
+  to: Device
+  type: belongs_to
+  via: aranya_label_get_author -> AranyaDeviceId
+  confidence: high
+  field: author
+- from: AfcSendChannel
+  to: Label
+  type: has_one
+  via: aranya_afc_send_channel_get_label_id
+  confidence: high
+- from: AfcReceiveChannel
+  to: Label
+  type: has_one
+  via: aranya_afc_receive_channel_get_label_id
+  confidence: high
+- from: AfcSendChannel
+  to: Device
+  type: has_one
+  via: aranya_afc_send_channel_get_peer_id
+  confidence: high
+  field: peer
+- from: AfcReceiveChannel
+  to: Device
+  type: has_one
+  via: aranya_afc_receive_channel_get_peer_id
+  confidence: high
+  field: peer
+- from: Team
+  to: Graph (DAG)
+  type: has_one
+  via: 'glossary: "Team ... sometimes used interchangeably with graph"'
+  confidence: medium
+- from: Graph (DAG)
+  to: Command
+  type: has_many
+  via: 'glossary: nodes of the DAG are commands'
+  confidence: high
+- from: Command
+  to: Fact / FactDB
+  type: has_many
+  via: 'glossary: a fact is produced by processing a command'
+  confidence: high
+entity_count: 12
+relationship_count: 17

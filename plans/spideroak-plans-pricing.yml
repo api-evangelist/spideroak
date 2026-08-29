@@ -1,0 +1,66 @@
+generated: '2026-08-29'
+method: searched
+source: https://spideroak.com/product/
+provider: SpiderOak
+currency: USD
+billing_period: null
+note: SpiderOak publishes a two-column edition comparison on its product page rather than priced tiers. No dollar
+  figure, no seat price, no usage meter and no billing period is published anywhere on spideroak.com, spideroak.one
+  or the Aranya docs site. The commercial tier is explicitly "Contact for Pricing"; the open-source edition is "Free
+  on GitHub" under AGPL, with the Aranya README stating "if you want to use it commercially, drop us a line" — i.e.
+  commercial use is a sales conversation, not a self-serve purchase. Recorded as two published tiers with no published
+  price, not as an absence of plans.
+plan_count: 2
+plans:
+- name: Open Source
+  price: '0'
+  price_display: Free on GitHub
+  currency: USD
+  billing_period: null
+  license: AGPL-3.0
+  url: https://github.com/aranya-project/aranya
+  included:
+  - SpiderOak Core Features
+  - Community Support (documentation, forums, bug fixes)
+  excluded:
+  - Technical Support (phone, email, integration)
+  - Premium Features (custom APIs)
+  - Verified Builds
+  - Certified Compiler
+  - Enrollment & Assignment User Interface
+  - Mission Management Dashboard
+  - Certifications (e.g. FIPS)
+  - Professional/Consulting Services
+  - Standard or Customized Training
+  quota: null
+  overage: null
+  limits: null
+- name: Team & Enterprise
+  price: null
+  price_display: Contact for Pricing
+  currency: USD
+  billing_period: null
+  url: https://spideroak.com/request-a-demo/
+  included:
+  - SpiderOak Core Features
+  - Community Support (documentation, forums, bug fixes)
+  - Technical Support (phone, email, integration)
+  - Premium Features (custom APIs)
+  - Verified Builds
+  - Certified Compiler
+  - Enrollment & Assignment User Interface
+  - Mission Management Dashboard
+  - Certifications (e.g. FIPS)
+  - Professional/Consulting Services
+  - Standard or Customized Training
+  quota: null
+  overage: null
+  limits: null
+related:
+- name: SpiderOak ONE (legacy consumer backup)
+  note: 21-day full-featured trial, no payment details required, per https://spideroak.one/llms.txt. Per-plan storage
+    pricing is behind the sign-in flow and was not published on a public page.
+  url: https://spideroak.one/
+- name: Tactical Edge Cyber Services (TECS)
+  note: ACTRA / TEARA / FORTEXS consulting engagements — quoted, not listed.
+  url: https://spideroak.com/services/

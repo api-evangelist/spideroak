@@ -1,0 +1,77 @@
+generated: '2026-08-29'
+method: searched
+source: https://aranya-project.github.io/core-concepts/onboarding, https://aranya-project.github.io/core-concepts/access-management,
+  https://github.com/aranya-project/aranya/releases/tag/v7.0.1, capi/spideroak-aranya-client.h
+docs: https://aranya-project.github.io/core-concepts/access-management
+provider: SpiderOak
+api: Aranya Client API
+note: 'Aranya has no HTTP surface and therefore no OpenAPI securitySchemes, no API keys, no bearer tokens and no
+  OAuth. Its authentication model is cryptographic and peer-to-peer: every device carries a key bundle and a device
+  identity, teams are created and joined with a QUIC sync seed, and peer sync is authenticated with certificate-based
+  mTLS as of v7.0.1. Authorization is policy-evaluated RBAC/ABAC on the Aranya graph. This artifact is written from
+  the provider''s own docs and the published C header, not derived from a spec.'
+schemes:
+- id: device-key-bundle
+  type: cryptographic-identity
+  description: Each Aranya device generates and holds a key bundle; the daemon generates and maintains the cryptographic
+    keys used to encrypt and decrypt data for Aranya and Fast Channels. The device identity (AranyaDeviceId) is
+    derived from it.
+  operations:
+  - aranya_get_key_bundle
+  - aranya_get_public_key_bundle
+  - aranya_get_device_id
+  - aranya_team_device_keybundle
+  - aranya_team_device_public_key_bundle
+- id: quic-sync-psk-seed
+  type: pre-shared-key
+  description: Joining or creating a team over the QUIC syncer requires a sync seed. A team creator generates one
+    (aranya_create_team_quic_sync_config_generate) or supplies raw seed IKM; a joining device supplies the wrapped
+    seed. The glossary defines PSK as "a key shared by two parties. The QUIC syncer uses PSKs instead of certificates."
+    Seed length is fixed at ARANYA_SEED_IKM_LEN (32 bytes).
+  operations:
+  - aranya_create_team_quic_sync_config_generate
+  - aranya_create_team_quic_sync_config_raw_seed_ikm
+  - aranya_add_team_quic_sync_config_wrapped_seed
+  - aranya_add_team_quic_sync_config_raw_seed_ikm
+  - aranya_encrypt_psk_seed_for_peer
+- id: mtls-sync
+  type: mutual-tls
+  description: 'v7.0.1 (2026-08-12) changed peer sync to use certificate-based mTLS ("use certificate-based mTLS
+    for sync", PR #786). A certificate generation tool (aranya-certgen) was introduced in v5.0.0. See also the published
+    mTLS specification at https://aranya-project.github.io/mtls/.'
+  since: v7.0.1
+  operations: []
+- id: daemon-uds
+  type: local-ipc
+  description: 'The client authenticates to nothing over the network to reach the daemon: it connects to a local
+    Unix domain socket whose path the caller sets explicitly. Trust is filesystem-scoped. A failure to reach it
+    returns ARANYA_ERROR_IPC.'
+  operations:
+  - aranya_client_config_builder_set_daemon_uds_path
+authorization:
+  model: policy-evaluated RBAC with rank-based authorization, plus label-based ABAC segmentation
+  description: Roles and permissions are defined in the Aranya policy language and evaluated by the policy VM. v4.0.0
+    introduced custom roles with a default set initialized by setup_default_roles(); v6.0.0 changed custom roles
+    to numerical rank-based authorization. Labels bind a data-plane channel to a set of policy rules, extending
+    graph authority into the data plane.
+  operations:
+  - aranya_setup_default_roles
+  - aranya_create_role
+  - aranya_delete_role
+  - aranya_assign_role
+  - aranya_revoke_role
+  - aranya_change_role
+  - aranya_add_perm_to_role
+  - aranya_remove_perm_from_role
+  - aranya_query_role_perms
+  - aranya_change_rank
+  - aranya_query_rank
+  - aranya_create_label
+  - aranya_delete_label
+  - aranya_assign_label
+  - aranya_revoke_label
+  docs: https://github.com/aranya-project/aranya/blob/main/crates/aranya-daemon/src/policy.md
+oauth: false
+api_keys: false
+bearer_tokens: false
+mtls: true

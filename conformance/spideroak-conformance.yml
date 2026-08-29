@@ -1,0 +1,103 @@
+generated: '2026-08-29'
+method: searched
+source: https://spideroak.com/hipaa/, https://spideroak.one/gdpr.md, https://spideroak.com/product/, https://spideroak.com/transparency/,
+  https://github.com/aranya-project/aranya/releases/tag/v7.0.1, https://aranya-project.github.io/mtls/, https://aranya-project.github.io/aranya-quic-channels/,
+  https://github.com/aranya-project/acvp
+provider: SpiderOak
+note: SpiderOak has no HTTP/REST API, so the usual cross-cutting web-API standards (OAuth2, OIDC, JSON:API, RFC
+  9457, OData, SCIM, pagination conventions) are all not-applicable rather than failed. What it does assert is transport-cryptography
+  and regulatory conformance. Every entry below carries the exact page or release that states it; nothing is inferred
+  from marketing category.
+conformance:
+- id: oauth2
+  conforms: false
+  applicable: false
+  evidence: No OAuth surface. /.well-known/oauth-authorization-server returned 404 on all four hosts (2026-08-29).
+    Authentication is device key bundles + QUIC PSK seeds + mTLS.
+- id: oidc
+  conforms: false
+  applicable: false
+  evidence: /.well-known/openid-configuration 404 on all four hosts (2026-08-29).
+- id: rfc9457
+  conforms: false
+  applicable: false
+  evidence: No HTTP surface; errors are an AranyaError C enum (see errors/spideroak-error-codes.yml).
+- id: json-api
+  conforms: false
+  applicable: false
+  evidence: No JSON HTTP surface.
+- id: pagination
+  conforms: false
+  applicable: false
+  evidence: Library API over local graph state; no paged collections.
+- id: idempotency
+  conforms: false
+  applicable: false
+  evidence: Not documented; see conventions/spideroak-conventions.yml idempotency block.
+- id: scim
+  conforms: false
+  applicable: false
+  evidence: 'No SCIM schema URN and no /scim endpoint. Identity is device-scoped and cryptographic, not directory-provisioned.
+    (Note: the unrelated legacy SpiderOak Blue product shipped LDAP sync via github.com/SpiderOak/netkes, last pushed
+    2025-06-04 — LDAP, not SCIM.)'
+- id: mtls
+  conforms: true
+  applicable: true
+  evidence: 'v7.0.1 (2026-08-12) release: "use certificate-based mTLS for sync" (PR #786). Published specification
+    at https://aranya-project.github.io/mtls/. Certificate generation tool aranya-certgen added in v5.0.0.'
+- id: quic
+  conforms: true
+  applicable: true
+  evidence: 'QUIC syncer is the default sync transport; published specification at https://aranya-project.github.io/aranya-quic-channels/.
+    Glossary defines QUIC as "a general-purpose transport layer network protocol that utilizes several multiplexed
+    UDP connections". Config surface: aranya_create_team_quic_sync_config_* / aranya_add_team_quic_sync_config_*.'
+- id: hipaa
+  conforms: true
+  applicable: true
+  evidence: 'https://spideroak.com/hipaa/ states CrossClave, SpiderOak One, CrossClave Groups and Semaphor are "HIPAA-compliant
+    as a Business Associate", complying with both the Privacy Rule and the Security Rule. Scope note: this claim
+    covers the legacy consumer/collaboration products, NOT the Aranya developer platform.'
+- id: gdpr
+  conforms: true
+  applicable: true
+  evidence: 'https://spideroak.one/gdpr.md — "SpiderOakONE complies with the EU General Data Protection Regulation
+    with No Knowledge encryption", including the right to be forgotten. Scope: SpiderOak ONE.'
+- id: fips-140
+  conforms: claimed
+  applicable: true
+  evidence: https://spideroak.com/product/ lists "Certifications (e.g. FIPS)" as a Team & Enterprise tier feature
+    and explicitly NOT available in the Open Source edition. The aranya-project GitHub org also carries an "acvp"
+    repository (NIST Automated Cryptographic Validation Protocol, the machine-readable test-vector protocol behind
+    CAVP/FIPS 140-3 algorithm validation), last pushed 2025-01-17. No CMVP or CAVP certificate number is published,
+    so this is recorded as CLAIMED and tier-gated, not verified.
+- id: zero-trust
+  conforms: claimed
+  applicable: true
+  evidence: https://spideroak.com/product/ describes a zero-trust architecture with RBAC, advanced segmentation
+    and secure data exchange "without the need for additional network security controls". No NIST SP 800-207 self-assessment
+    or third-party attestation is published.
+domain_standard:
+  market: defense / aerospace / cryptographic module validation
+  declared_in_contract: false
+  note: 'REWARD-ONLY check, honestly negative. The published contract — aranya-client.h and the Rust crates — declares
+    no domain-standard signature: no SCIM schema URN, no OData $metadata, no OpenRTB, no Sparkplug topic namespace,
+    no ActivityPub actor, no LTI/OneRoster/Ed-Fi/Caliper/QTI shape, no OAI-PMH verb, no ORCID/DataCite/Crossref
+    scheme, no HL7v2/X12/EDIFACT/ISO-20022 message type. The nearest thing to a domain standard in SpiderOak''s
+    market is NIST FIPS 140-3 / ACVP cryptographic module validation, and the evidence for it is an org repository
+    and a tier-gated marketing line, NOT a declaration inside the contract. Recorded as absent rather than manufactured.'
+  candidates_probed:
+  - NIST FIPS 140-3 / CMVP
+  - NIST ACVP
+  - NIST SP 800-207 Zero Trust Architecture
+  - SCIM
+  - HIPAA (regulatory, not contract-declared)
+certifications_published:
+- HIPAA (Business Associate, legacy products)
+- GDPR (SpiderOak ONE)
+certifications_claimed_not_evidenced:
+- FIPS (tier-gated, no certificate number published)
+trust_center:
+  exists: false
+  note: 'No trust.spideroak.com, no Vanta/Drata/SafeBase trust center. The closest published surfaces are https://spideroak.com/transparency/
+    (a transparency report: 0 search warrants, 0 court orders, 0 subpoenas, 0 national security letters) and the
+    per-regulation pages above. NO TrustCenter pointer is emitted.'

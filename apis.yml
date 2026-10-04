@@ -43,7 +43,7 @@ tags:
 - Defense
 - Aerospace
 - Space
-- Open-Source
+- Open Source
 - Edge Computing
 - Data Exchange
 - Backup and Storage
@@ -62,6 +62,7 @@ tags_raw:
 - Edge Computing
 - Data Exchange
 - Backup and Storage
+- Open-Source
 apis:
 - aid: spideroak:spideroak-aranya-client
   name: Aranya Client API

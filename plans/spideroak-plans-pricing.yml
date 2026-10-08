@@ -64,3 +64,23 @@ related:
 - name: Tactical Edge Cyber Services (TECS)
   note: ACTRA / TEARA / FORTEXS consulting engagements — quoted, not listed.
   url: https://spideroak.com/services/
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - negotiated
+  units: []
+  plans:
+  - name: Open Source
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Team & Enterprise
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
